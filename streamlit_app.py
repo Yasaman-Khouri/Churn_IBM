@@ -4,9 +4,8 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-# ---------------------------------------------------------
-# Page Configuration & Styling
-# ---------------------------------------------------------
+
+# Start Page Styling
 st.set_page_config(
     page_title="Telecom Churn Predictor",
     page_icon="📡",
@@ -14,7 +13,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.title("📡 Telecom Customer Churn Risk Predictor")
+st.title(" Telecom Customer Churn Risk Predictor")
 st.markdown(
     """
 Predict customer churn probability using an optimized ML classifier.
@@ -22,9 +21,8 @@ Adjust the **decision threshold** in the sidebar to prioritize recall.
 """
 )
 
-# ---------------------------------------------------------
-# Load Artifacts (Cached for Performance)
-# ---------------------------------------------------------
+
+# Loading Artifacts
 @st.cache_resource
 def load_artifacts():
     model = joblib.load("artifacts/best_xgb.pkl")
@@ -41,9 +39,8 @@ except FileNotFoundError as e:
     )
     st.stop()
 
-# ---------------------------------------------------------
-# Sidebar: Business & Threshold Configuration
-# ---------------------------------------------------------
+
+# Sidebar Design: Business & Threshold Configuration
 st.sidebar.header("⚙️ Model Settings")
 threshold = st.sidebar.slider(
     "Decision Threshold (Recall Tuning)",
@@ -61,9 +58,8 @@ st.sidebar.info(
     "before high-value customers complete their cancellation."
 )
 
-# ---------------------------------------------------------
-# User Input Form
-# ---------------------------------------------------------
+
+# User Input
 with st.form("customer_input_form"):
     st.subheader("👤 Customer Demographic & Account Data")
     col1, col2, col3 = st.columns(3)
@@ -108,9 +104,8 @@ with st.form("customer_input_form"):
 
     submitted = st.form_submit_button("🔍 Calculate Churn Risk")
 
-# ---------------------------------------------------------
-# Inference & Pipeline Execution
-# ---------------------------------------------------------
+
+# Inference
 if submitted:
     # 1. Assemble raw input into a 1-row DataFrame
     raw_input_dict = {
@@ -150,9 +145,8 @@ if submitted:
     churn_proba = model.predict_proba(input_aligned)[0, 1]
     is_churn = int(churn_proba >= threshold)
 
-    # ---------------------------------------------------------
-    # UI Output Presentation
-    # ---------------------------------------------------------
+
+    # UI Presentation
     st.markdown("---")
     st.subheader("📊 Assessment Result")
 
