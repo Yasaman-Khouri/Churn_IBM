@@ -8,7 +8,7 @@
 - [Dataset](#-dataset)
 - [Data Preprocessing Pipeline](#-data-preprocessing-pipeline)
 - [Model Architectures](#-model-architectures)
-- [Insights](#-insights)
+- [Insights](#insights)
 - [Results & Performance Comparison](#-results--performance-comparison)
 - [Streamlit Deployment](#-streamlit-deployment)
 - [Installation & Setup](#-installation--setup)
@@ -119,7 +119,7 @@ This Classifier also provides insight into which features were the most importan
 ### 🔹 XGBoost
 XGBoost (eXtreme Gradient Boosting) is a distributed, open-source machine learning library that uses gradient boosted decision trees, a supervised learning boosting algorithm that makes use of gradient descent. It is known for its speed, efficiency and ability to scale well with large datasets. This powerful model is also used in this project as one of the classification candidates. 
 
-## ✔️ Insights
+## Insights
 After training all three models and obtaining the test results it is considered that all three model despite their difference in performance and ability have appoximately similar results. Evaluation Metrics in the table below are mentioned for class 1 (Churn). 
 
 | Model  | Accuracy | Precision | Recall | F1-score |
@@ -162,7 +162,7 @@ While changing the threshold the state where f1-score and recall metrics are bal
 It is considered that this threshold was chosen by tuning on logisitc regression model and the rest of the calculations for all models are done using this this threshold value.
 
 ### Hyperparameter Tuning
-Hyperparamter tuning in this section is performed using `GridSearchCV` in scikit-learn library. This tool finds the best combination of paramters that results in the highest model performance based on the metric that is chosen. 
+Hyperparamter tuning in this section is performed using `GridSearchCV()` in scikit-learn library. This tool finds the best combination of paramters that results in the highest model performance based on the metric that is chosen. 
 
 > Performance metric for all models during gridsearch is **F1-macro** which is the average of F1-score for both target classes and is used when target classes are *imbalanced*.
 
@@ -215,7 +215,7 @@ Numerical features are scaled using the saved scaler, and the trained model retu
 
 bash
 git clone https://github.com/Yasaman-Khouri/Churn_IBM
-cd bbc-sport-classifier
+cd Churn_IBM
 
 ### 2️⃣ Create Virtual Environment
 
@@ -229,6 +229,22 @@ venv\Scripts\activate      # Windows
 
 ```bash
 pip install -r requirements.txt
+```
+
+### 4️⃣ Run the Streamlit App
+```bash
+streamlit run streamlit_app.py
+```
+If Streamlit does not start correctly, use:
+```bash
+python -m streamlit run streamlit_app.py
+```
+### 5️⃣ Open in Browser
+
+After running the command, open the local URL shown in the terminal, usually:
+
+```bash
+http://localhost:8501
 ```
 
 ## 👤 Author
